@@ -9,6 +9,23 @@ module.exports = {
         return response.json(ongs);
     },
 
+    async update(request, response){
+        const { id } = request.params;
+        const { name, email, whatsapp, city, uf } = request.body;
+
+        const ongs = await connection('ongs')
+        .where('id', id)
+        .update({
+            name,
+            email,
+            whatsapp,
+            city,
+            uf,
+        });
+
+        return response.json({ ongs });
+    },
+
     async create(request, response) {
     
         const { name, email, whatsapp, city, uf } = request.body;
